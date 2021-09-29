@@ -3,4 +3,4 @@ alert('Hello World!');
 let favouriteFood;
 favouriteFood = 'Thai';
 
-document.write(favouriteFood);
+document.write("Favourite Food: " + favouriteFood);
