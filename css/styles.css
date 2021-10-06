@@ -1,0 +1,42 @@
+/*Declare variables */
+:root{
+  --border-color: white;
+  --pagebackground-color: black;
+  --headerfooter-color: #8f0b0b;
+}
+
+/*browser reset; applied on all elements*/
+*, *::before, *::after{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+  }
+
+  /*.page-area{
+    display: flex;
+    flex-direction: column;
+    /* expand to take full height of page */
+    /* min-height overrides both height & max-height *
+    min-height: 100vh;
+  }*/
+
+/*  main{
+    flex-grow: 1;
+    overflow: auto;
+    /*background-color: var(--pagebackground-color);
+  }
+  .pokedex-home {
+  max-width: 45%;
+  margin: 0 auto;
+}*/
+
+body{
+  /*display: flex;
+  flex-direction: column;*/
+  font-family: 'Abril Fatface', cursive;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 1.6;
+  color: white;
+  background-color: var(--pagebackground-color);
+}

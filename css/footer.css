@@ -1,0 +1,9 @@
+.page-footer {
+  clear: both;
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #8f0b0b;
+  width: 100%;
+  border-top: 3px solid white;
+}

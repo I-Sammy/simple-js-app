@@ -1,13 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple JS App</title>
-    <link href="css/styles.css" rel="stylesheet"
-    type="text/css"/>
+    <title>Pokedex</title>
+    <!-- Adding icon -->
+    <link rel="shortcut icon" href="./img/favicon-32x32.png">
+    <!-- link to reset default styles -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- links to add google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gemunu+Libre:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap" rel="stylesheet">
+    <!-- Adding link to css file-->
+    <link href="./css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/header.css" type="text/css" rel="stylesheet">
+
   </head>
   <body>
+    <div class="page-area">
+      <header class="page-header">
+        <!--Display animated logo -->
+        <video height="100" width="100" autoplay muted loop class="main-navigation page-header_item">
+          <source src="./img/pagelogo.mp4" type="video/mp4">
+        </video>
+        <nav id="navigation-container" class="main-navigation page-header_item">
+          
+        </nav>
+      </header>
+      <main>
+
+      </main>
+    </div>
+    <!-- Adding link to javasript file-->
     <script src="js/scripts.js"></script>
   </body>
 </html>
