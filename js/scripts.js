@@ -45,21 +45,29 @@ let pokemonList = [
 }
 ];
 
-//forEach loop to print all the pokemon names inside the array
-//print the names and heights of all pokemone inside the array
-pokemonList.forEach(function(pokemon){
-  //conditional loop to print pokemon details depending on their heights
-  if(pokemon.height<= 0.3){
-    document.write(pokemon.name + ' (height: ' + pokemon.height + ') - Hey, that\'s a tiny pokemon :). </br>');
-  }
-  else if(pokemon.height>1.0 && pokemon.height<2.0){
-    document.write(pokemon.name + ' (height: ' + pokemon.height + ') - Wow! That\'s big!</br>');
-  }
-  else{
-    document.write(pokemon.name + ' (height: ' + pokemon.height + ')</br>');
-  }
-});
+//function to create buttons for each pokemon
+function addListItem(pokemon){
+    let showAllPokemon = document.querySelector('.pokemon-list');
+    let pokemonListItem = document.createElement('li');
+    let button = document.createElement('button');
+    button.innerText = pokemon.name;
+    button.classList.add('button-class');
+    pokemonListItem.appendChild(button);
+    showAllPokemon.appendChild(pokemonListItem);
+    //call showDetails() upon button click
+    addEventToButton(button,pokemon);
+}
 
+//function to show details of the selected pokemon
+function showDetails(pokemon){
+  console.log(pokemon);
+}
+//function to add eventListener to button
+function addEventToButton(button,pokemon){
+  button.addEventListener('click',function(){
+    showDetails(pokemon);
+  });
+}
 //function to return all the info from pokemonList arary
 function getAll(){
   return pokemonList;
@@ -67,26 +75,34 @@ function getAll(){
 
 //function to add pokemon objects into pokemonList array
 function add(pokemon){
-  if(typeof pokemon === 'object'){
+  if(typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'weight' in pokemon && 'types' in pokemon){
     pokemonList.push(pokemon);
   }
   else{
-    console.log('Only objects can be added!');
+    console.log('Given information is incorrect!');
   }
 }
 
 //function to look for a pokemon based on its name
-function find(pokemonName){
-    let result = pokemonList.filter(pokemon => pokemon.name === pokemonName);
-    console.log(result[0]);
+function findPokemon(pokemonName){
+    return pokemonList.filter(pokemon => pokemon.name === pokemonName);
 }
 
 return{
   getAll: getAll,
   add: add,
-  find: find
+  findPokemon,
+  addListItem
 };
 
 })()
 
-pokemonRepository.find('Pikachu');
+//for loop to call function for each pokemon to form a list of all pokemon
+pokemonRepository.getAll().forEach(function(pokemon){
+  pokemonRepository.addListItem(pokemon);
+});
+
+
+let printPokemonDetails = pokemonRepository.findPokemon('Pikachu');
+console.log(printPokemonDetails[0]);
+console.log(pokemonRepository.getAll());
