@@ -1,49 +1,22 @@
 //Declare and assign objects to an array with some pokemone details
 let pokemonRepository = (function(){
-let pokemonList = [
-  {
-    name: 'Pikachu',
-    height: 0.4,
-    weight: 6.0,
-    types: ['electric']
-  },
-  {
-     name: 'Charmander',
-     height: 0.6,
-     weight: 8.5,
-     types: ['fire']
- },
- {
-    name: 'Bulbasaur',
-    height: 0.7,
-    weight: 6.9,
-    types: ['grass','poison']
-},
-{
-   name: 'Butterfree',
-   height: 1.1,
-   weight: 32.0,
-   types: ['bug','flying']
-},
-{
-   name: 'Igglybuff',
-   height: 0.3,
-   weight: 1.0,
-   types: ['fairy','normal']
-},
-{
-  name: 'Charizard',
-  height: 1.7,
-  weight: 90.5,
-  types: ['fire','flying']
-},
-{
-  name: 'Machamp',
-  height: 1.6,
-  weight: 130,
-  types: ['fighting']
+let pokemonList = [];
+let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150'; //API to fetch pokemon info
+
+//function to add pokemon objects into pokemonList array
+function add(pokemon){
+  if(typeof pokemon === 'object' && 'name' in pokemon && 'detailsUrl' in pokemon){
+    pokemonList.push(pokemon);
+  }
+  else{
+    console.log('Given information is incorrect!');
+  }
 }
-];
+
+//function to return all the info from pokemonList arary
+function getAll(){
+  return pokemonList;
+}
 
 //function to create buttons for each pokemon
 function addListItem(pokemon){
@@ -58,29 +31,49 @@ function addListItem(pokemon){
     addEventToButton(button,pokemon);
 }
 
+//loading pokemon name and url for details from API
+function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+        console.log(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    })
+  }
+
+//show details for the selected pokemon usimg info from API
+function loadDetails(item){
+  let url = item.detailsUrl;
+  return fetch(url).then(function(response){
+    return response.json();
+  }).then (function(details){
+    item.imageUrl = details.sprites.front_default;
+    item.height = details.height;
+    item.types = details.types;
+  }).catch(function (e){
+    console.error(e);
+  });
+}
+
 //function to show details of the selected pokemon
 function showDetails(pokemon){
-  console.log(pokemon);
+  loadDetails(pokemon).then(function(){
+    console.log(pokemon);
+  });
 }
 //function to add eventListener to button
 function addEventToButton(button,pokemon){
-  button.addEventListener('click',function(){
+  button.addEventListener('click',function(event){
     showDetails(pokemon);
   });
-}
-//function to return all the info from pokemonList arary
-function getAll(){
-  return pokemonList;
-}
-
-//function to add pokemon objects into pokemonList array
-function add(pokemon){
-  if(typeof pokemon === 'object' && 'name' in pokemon && 'height' in pokemon && 'weight' in pokemon && 'types' in pokemon){
-    pokemonList.push(pokemon);
-  }
-  else{
-    console.log('Given information is incorrect!');
-  }
 }
 
 //function to look for a pokemon based on its name
@@ -89,20 +82,36 @@ function findPokemon(pokemonName){
 }
 
 return{
-  getAll: getAll,
-  add: add,
+  getAll,
+  //add,
   findPokemon,
-  addListItem
+  addListItem,
+  loadList,
+  loadDetails
 };
 
-})()
+})();
 
-//for loop to call function for each pokemon to form a list of all pokemon
-pokemonRepository.getAll().forEach(function(pokemon){
-  pokemonRepository.addListItem(pokemon);
+pokemonRepository.loadList().then(function(){
+  //for loop to call function for each pokemon to form a list of all pokemon
+  pokemonRepository.getAll().forEach(function(pokemon){
+    pokemonRepository.addListItem(pokemon);
+  });
 });
 
+//
 
-let printPokemonDetails = pokemonRepository.findPokemon('Pikachu');
-console.log(printPokemonDetails[0]);
-console.log(pokemonRepository.getAll());
+//let printPokemonDetails = pokemonRepository.findPokemon('Pikachu');
+//console.log(printPokemonDetails[0]);
+//console.log(pokemonRepository.getAll());
+
+//script for sidebar
+function openSlideMenu() {
+  document.getElementById('menu').style.width = '250px';
+  document.getElementById('content').style.marginLeft = '250px';
+}
+
+function closeSlideMenu() {
+  document.getElementById('menu').style.width = '0';
+  document.getElementById('content').style.marginLeft = '0';
+}

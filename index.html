@@ -16,7 +16,8 @@
     <!-- Adding link to css file-->
     <link href="./css/styles.css" rel="stylesheet" type="text/css"/>
     <link href="./css/header.css" type="text/css" rel="stylesheet">
-
+    <!--stylesheet for sidebar icons etc -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </head>
   <body>
     <div class="page-area">
@@ -30,6 +31,17 @@
         </nav>
       </header>
       <main>
+        <div id="content" class="sidebar">
+          <span class="slide">
+            <a href="#" onClick="openSlideMenu()"><i class="fas fa-bars"></i></a>
+          </span>
+          <div id="menu" class="nav">
+            <a href="#" class="close" onClick="closeSlideMenu()"><i class="fas fa-times"></i></a>
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+          </div>
+        </div>
         <div class="page-area">
           <ul class="pokemon-list">
 
@@ -38,6 +50,8 @@
       </main>
     </div>
     <!-- Adding link to javasript file-->
+    <script src="js/promise-polyfill.js"></script>
+    <script src="js/fetch-polyfill.js"></script>
     <script src="js/scripts.js"></script>
   </body>
 </html>
