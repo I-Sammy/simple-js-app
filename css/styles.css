@@ -18,6 +18,7 @@
     /* expand to take full height of page */
     /* min-height overrides both height & max-height */
     min-height: 100vh;
+    align-items: center;
   }
 
   main{
@@ -29,16 +30,19 @@
   max-width: 45%;
   margin: 0 auto;
   }
-
-body{
-  /*display: flex;
-  flex-direction: column;*/
+  ul{
+    columns: 5;
+  }
+  body{
+  display: flex;
+  flex-direction: column;
   font-family: 'Abril Fatface', cursive;
   font-weight: 200;
   font-size: 16px;
   line-height: 1.6;
   /*color: white;*/
   background-color: var(--pagebackground-color);
+  /*align-items: center;*/
 }
 
 /*css for pokemon buttons*/
@@ -52,6 +56,7 @@ body{
  display: inline-block;
  font-size: 16px;
  margin: 4px 2px;
+ width: 150px;
  transition-duration: 0.4s;
  cursor: pointer;
  background-color: white;
