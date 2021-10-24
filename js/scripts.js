@@ -98,6 +98,7 @@ function showModal(title,pokemon) {
   closeButtonElement.addEventListener('click',hideModal);
 
   let modalTitleElement = document.createElement('h2');
+  modalTitleElement.classList.add('modal-title');
   modalTitleElement.innerText = title;
 
   let modalImageElement = document.createElement('div');
@@ -175,5 +176,3 @@ function closeSlideMenu() {
   document.getElementById('menu').style.width = '0';
   document.getElementById('content').style.marginLeft = '0';
 }
-
-//script for modal
