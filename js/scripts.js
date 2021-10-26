@@ -58,10 +58,16 @@ function loadDetails(item){
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
     item.weight = details.weight;
-    item.types = details.types;
+    //item.types = details.types;
+    let pokemonType = details.types.map(types => {
+      return types.type.name;
+    })
+    item.pokemonType = pokemonType;
+
   }).catch(function (e){
     console.error(e);
   });
+
 }
 
 //function to show details of the selected pokemon
@@ -108,7 +114,7 @@ function showModal(title,pokemon) {
 
   let modalContentElement = document.createElement('p');
   modalContentElement.innerText = 'Name: '+pokemon.name +'\n'+ 'Height: '+ pokemon.height+ '\n' +
-  'Weight: '+ pokemon.weight;
+  'Weight: '+ pokemon.weight+ '\n'+ 'Type: '+ pokemon.pokemonType;
 
   modalImageElement.appendChild(pokemonImage);
   modal.appendChild(closeButtonElement);
