@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="./img/favicon-32x32.png">
     <!-- link to reset default styles -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- link to bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- links to add google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +28,14 @@
         <video height="100" width="100" autoplay muted loop class="main-navigation page-header_item">
           <source src="./img/pagelogo.mp4" type="video/mp4">
         </video>
-        <nav id="navigation-container" class="main-navigation page-header_item">
+        <nav id="navigation-container" class="navbar navbar-expand-lg fixed-top">
           <h1>POKEDEX</h1>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNavData">
+            <!--searchbar-->!
+          <form class="form-row form-inline my-2 my-lg-0">
+              <input class = "form-control mr-sm-2" type = "text" placeholder="Search Pokemon" aria-label="Search" id="filter">
+          </form>
+        </div>
         </nav>
       </header>
       <main>
@@ -42,13 +50,26 @@
             <a href="#">Contact</a>
           </div>
         </div>
-        <div class="page-area">
+        <div id="pokemonListDiv" class="page-area">
           <ul class="pokemon-list">
 
           </ul>
         </div>
-        <div id="modal-container">
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Loading...
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
@@ -56,6 +77,14 @@
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
     <script src="js/micromodal.min.js"></script>
+    <!--Adding jQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!--Adding bootstrap js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!--Adding my own jscript file-->
     <script src="js/scripts.js"></script>
   </body>
 </html>

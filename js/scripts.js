@@ -22,9 +22,12 @@ function getAll(){
 function addListItem(pokemon){
     let showAllPokemon = document.querySelector('.pokemon-list');
     let pokemonListItem = document.createElement('li');
+    pokemonListItem.classList.add('group-list-item');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('button-class');
+    button.classList.add('btn','button-class');
+    button.setAttribute('data-target', '#exampleModal');
+		button.setAttribute('data-toggle', 'modal');
     pokemonListItem.appendChild(button);
     showAllPokemon.appendChild(pokemonListItem);
     //call showDetails() upon button click
@@ -91,62 +94,30 @@ function findPokemon(pokemonName){
 }
 
 function showModal(title,pokemon) {
-  let modalContainer = document.querySelector('#modal-container');
-  //clear all existing modal content
-  modalContainer.innerHTML = '';
-  //create a div insode modalContainer div and add a class name to it
-  let modal = document.createElement('div');
-  modal.classList.add('modal');
-  //add new modal content
-  let closeButtonElement = document.createElement('button');
-  closeButtonElement.classList.add('modal-close');
-  closeButtonElement.innerText = 'X';
-  closeButtonElement.addEventListener('click',hideModal);
+  let modalBody = $('.modal-body');
+	let modalTitle = $('.modal-title');
+	//clear all existing modal content
+	modalTitle.empty();
+	modalBody.empty();
+  //creating elements for modal to display
+  let pokemonName = $('<h1>' + pokemon.name + '</h1>');
+  let pokemonImage = $('<img class="modal-img" style="width:50%"">');
+  pokemonImage.attr('src',pokemon.imageUrl);
+  let pokemonHeight = $('<p>' + 'Height : ' + pokemon.height + 'm' + '</p>');
+  let pokemonWeight = $('<p>' + 'Weight : ' + pokemon.weight + 'Kg' +'</p>');
+  let pokemonType = $('<p>' + 'Type : ' + pokemon.pokemonType +'</p>');
 
-  let modalTitleElement = document.createElement('h2');
-  modalTitleElement.classList.add('modal-title');
-  modalTitleElement.innerText = title;
-
-  let modalImageElement = document.createElement('div');
-  modalImageElement.classList.add('modal-Image');
-  let pokemonImage = document.createElement('img');
-  pokemonImage.src =pokemon.imageUrl;
-
-  let modalContentElement = document.createElement('p');
-  modalContentElement.innerText = 'Name: '+pokemon.name +'\n'+ 'Height: '+ pokemon.height+ '\n' +
-  'Weight: '+ pokemon.weight+ '\n'+ 'Type: '+ pokemon.pokemonType;
-
-  modalImageElement.appendChild(pokemonImage);
-  modal.appendChild(closeButtonElement);
-  modal.appendChild(modalTitleElement);
-  modal.appendChild(modalImageElement);
-  modal.appendChild(modalContentElement);
-
-  modalContainer.appendChild(modal);
-
-  modalContainer.classList.add('is-visible');
+  modalTitle.append(pokemonName);
+  modalBody.append(pokemonImage);
+  modalBody.append(pokemonHeight);
+  modalBody.append(pokemonWeight);
+  modalBody.append(pokemonType);
 }
 
 function hideModal(){
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.classList.remove('is-visible');
 }
-
-//to close the modal on click
-document.querySelector('#modal-container').addEventListener('click', function(e){
-    // Since this is also triggered when clicking INSIDE the modal
-    // We only want to close if the user clicks directly on the overlay
-    let target = e.target;
-    if (target === document.querySelector('#modal-container')) {
-      hideModal();
-    }
-  });
-  //close the modal by pressing on ESC button
-  window.addEventListener('keydown', (e) => {
-   if (e.key === 'Escape' && document.querySelector('#modal-container').classList.contains('is-visible')) {
-     hideModal();
-   }
- });
 
 return{
   getAll,
@@ -158,6 +129,17 @@ return{
 };
 
 })();
+
+//search filter
+$(document).ready(function(){
+	$('#filter').on('keyup', function() {
+		var value = $(this).val().toLowerCase();
+		$('#pokemonListDiv *').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	/* eslint-enable no-undef */
+		});
+	});
+});
 
 pokemonRepository.loadList().then(function(){
   //for loop to call function for each pokemon to form a list of all pokemon
@@ -175,10 +157,12 @@ pokemonRepository.loadList().then(function(){
 //script for sidebar
 function openSlideMenu() {
   document.getElementById('menu').style.width = '250px';
+  document.getElementById('menu').style.marginTop = '80px';
   document.getElementById('content').style.marginLeft = '250px';
 }
 
 function closeSlideMenu() {
   document.getElementById('menu').style.width = '0';
+  document.getElementById('menu').style.marginTop = '0';
   document.getElementById('content').style.marginLeft = '0';
 }
